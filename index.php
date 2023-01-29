@@ -3,7 +3,7 @@ include_once ('templates/helpers.php');
 
 
 $project = renderTemplate('project.php');
-$title = 'Назва сторінки';
+$title = 'Школа php';
 $savchenko = 'Савченко';
 
 
