@@ -1,16 +1,17 @@
 <?php
 include_once ('templates/helpers.php');
-
+$arr = [
+    'headsite'=>'школа php',
+    'savchenko'=>'Савченко',
+];
+extract($arr);
 
 $project = renderTemplate('project.php');
-$title = 'Школа php';
-$savchenko = 'Савченко';
-
-
+$down = renderTemplate('footer.php');
 $card = renderTemplate('card1.php');
 $vstavka = renderTemplate('main.php',['card1'=>$card]);
 
-$website = renderTemplate('layout.php',['content'=>$vstavka,'project'=>$project,'title'=>$title,'soname'=>$savchenko]);
+$website = renderTemplate('layout.php',['content'=>$vstavka,'project'=>$project,'sitename'=>$headsite,'soname'=>$savchenko,'footer'=>$down]);
 
 print $website;
 
