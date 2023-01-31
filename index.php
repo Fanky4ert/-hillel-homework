@@ -1,22 +1,30 @@
 <?php
-include_once ('templates/helpers.php');
+require_once('helpers.php');
 
-$project = renderTemplate('project.php');
-$down = renderTemplate('footer.php');
-$card = renderTemplate('card1.php');
+$project_side = renderTemplate('project.php');
+$kanban_kard = renderTemplate('kanban_kard.php');
 
-$vstavka = renderTemplate('main.php',
-    [
-        'card1'=>$card,
-    ]);
+
+
+
+$main_content = renderTemplate('main.php',
+  [
+    'becklog_card' => $kanban_kard,
+    'todo_card' => $kanban_kard,
+    'inprogress_card' => $kanban_kard,
+    'done_card' => $kanban_kard,
+
+  ]
+);
+
 
 $website = renderTemplate('layout.php',
     [
-        'content'=>$vstavka,
-        'site_name'=>'мой сайт',
-        'soname'=>'Savchenko',
-        'project'=>$project,
-    ]);
+        'site_name' => 'мой сайт',
+        'username' => 'Savchenko',
+        'content' => $main_content,
+    ]
+);
 
 print $website;
 

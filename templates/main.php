@@ -1,4 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper kanban">
     <section class="content-header">
         <div class="container-fluid">
@@ -36,7 +35,7 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="backlog">
-                    <?=$card1?>
+                    <?=$becklog_card?>
                 </div>
             </div>
             <div class="card card-row card-primary">
@@ -46,7 +45,7 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="to-do">
-                    <?=$card1?>
+                    <?=$todo_card?>
                 </div>
             </div>
             <div class="card card-row card-default">
@@ -56,7 +55,7 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="in-progress">
-                    <?=$card1?>
+                    <?=$inprogress_card?>
                 </div>
             </div>
             <div class="card card-row card-success">
@@ -66,7 +65,7 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="done">
-                    <?=$card1?>
+                    <?=$done_card?>
                 </div>
             </div>
         </div>

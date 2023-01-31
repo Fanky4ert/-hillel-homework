@@ -66,7 +66,9 @@
                     <img src="static/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block"><?=$soname?></a>
+                    <a href="#" class="d-block">
+                        <?=$username?>
+                    </a>
                 </div>
             </div>
 
@@ -76,7 +78,13 @@
                     <!-- Add icons to the links using the .nav-icon class
                        with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <?=$project?>
+                        <a href="index.php" class="nav-link active">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                Назва проекту
+                                <span class="badge badge-info right">2</span>
+                            </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="index.php" class="nav-link">
@@ -93,8 +101,10 @@
         <!-- /.sidebar -->
     </aside>
 
+    <!-- Content Wrapper. Contains page content -->
     <?=$content?>
 
+    <!-- Footer -->
     <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
         <b>Version</b> 0.1.0
@@ -102,7 +112,6 @@
     <strong>Copyright &copy; 2023 <a href="https://ithillel.ua/">Комп'ютерна школа Hillel</a>.</strong> All rights
     reserved.
     </footer>
-
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
