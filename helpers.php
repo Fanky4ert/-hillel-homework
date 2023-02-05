@@ -143,3 +143,42 @@ function renderTemplate($name, array $data = []) {
 
     return $result;
 }
+
+function daytime($taskdate) {
+    $difftime = test($taskdate);
+
+    if ($difftime >= 24) {
+      return true;
+        }
+    return false;
+}
+
+
+function hourCard($taskdate) {
+    $difftime = test($taskdate);
+
+    if ($difftime < 0){
+        $difftime = 0;
+    }
+    $h = "hours";
+    $lengstring = strlen($difftime . $h);
+    $hours = str_pad($difftime, $lengstring, $h, STR_PAD_RIGHT);
+
+    return $hours;
+}
+
+function test($taskdate){
+    $nowtime = strtotime($taskdate);
+    $worldtime = time();
+    $difftime = floor(($nowtime - $worldtime)/3600);
+
+    return $difftime;
+}
+
+
+
+
+
+
+
+

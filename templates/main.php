@@ -25,7 +25,6 @@
             </div>
         </div>
     </section>
-
     <section class="content pb-3">
         <div class="container-fluid h-100">
             <div class="card card-row card-secondary">
@@ -35,7 +34,11 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="backlog">
-                    <?=$becklog_card?>
+
+                    <?php foreach($tasks ['becklog'] as $task): ?>
+                        <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
+                    <?php endforeach;?>
+
                 </div>
             </div>
             <div class="card card-row card-primary">
@@ -45,7 +48,11 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="to-do">
-                    <?=$todo_card?>
+
+                    <?php foreach($tasks ['todo'] as $task): ?>
+                        <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
+                    <?php endforeach;?>
+
                 </div>
             </div>
             <div class="card card-row card-default">
@@ -55,7 +62,11 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="in-progress">
-                    <?=$inprogress_card?>
+
+                    <?php foreach($tasks ['in_progress'] as $task): ?>
+                        <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
+                    <?php endforeach;?>
+
                 </div>
             </div>
             <div class="card card-row card-success">
@@ -65,7 +76,11 @@
                     </h3>
                 </div>
                 <div class="card-body connectedSortable" data-status="done">
-                    <?=$done_card?>
+
+                    <?php foreach($tasks ['done'] as $task): ?>
+                        <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
+                    <?php endforeach;?>
+
                 </div>
             </div>
         </div>
