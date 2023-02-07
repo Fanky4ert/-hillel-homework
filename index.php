@@ -48,9 +48,6 @@ $tasks = [
   ],
 ];
 
-//$project_side = renderTemplate('project_name.php');
-//$kanban_kard = renderTemplate('kanban_kard.php');
-
 $main_content = renderTemplate('main.php',
   [
     'tasks' => $tasks
