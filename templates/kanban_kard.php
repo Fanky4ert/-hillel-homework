@@ -15,7 +15,7 @@
         <?php if(!empty($task['due_date'])):?>
            <small class="<?=daytime($task['due_date']) ? 'badge-success' : 'badge-danger';?>">
                <?=hourCard($task['due_date']);?>
-               <i class="far fa-clock"></i>
+               <i class="far fa-clock">hours</i>
            </small>
         <?php endif; ?>
     </div>

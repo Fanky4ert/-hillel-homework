@@ -145,7 +145,7 @@ function renderTemplate($name, array $data = []) {
 }
 
 function daytime($taskdate) {
-    $difftime = test($taskdate);
+    $difftime = obsoluttime($taskdate);
 
     if ($difftime >= 24) {
       return true;
@@ -155,19 +155,14 @@ function daytime($taskdate) {
 
 
 function hourCard($taskdate) {
-    $difftime = test($taskdate);
-
+    $difftime = obsoluttime($taskdate);
     if ($difftime < 0){
         $difftime = 0;
     }
-    $h = "hours";
-    $lengstring = strlen($difftime . $h);
-    $hours = str_pad($difftime, $lengstring, $h, STR_PAD_RIGHT);
-
-    return $hours;
+     return $difftime;
 }
 
-function test($taskdate){
+function obsoluttime($taskdate){
     $nowtime = strtotime($taskdate);
     $worldtime = time();
     $difftime = floor(($nowtime - $worldtime)/3600);
