@@ -1,19 +1,17 @@
 <?php
 require_once('helpers.php');
 
-
-
 $projects = [
-    [
+  [
     'id'=>'1',
     'name' => 'Проект 1',
     'count' => 2,
-    ],
-    [
-        'id' => 2,
-        'name' => 'Проект 2',
-        'count' => 5,
-    ],
+  ],
+  [
+    'id' => 2,
+    'name' => 'Проект 2',
+    'count' => 5,
+  ],
 ];
 
 $tasks = [
@@ -50,24 +48,18 @@ $tasks = [
   ],
 ];
 
-$project_side = renderTemplate('project_name.php');
-$kanban_kard = renderTemplate('kanban_kard.php');
+//$project_side = renderTemplate('project_name.php');
+//$kanban_kard = renderTemplate('kanban_kard.php');
 
 $main_content = renderTemplate('main.php',
   [
-    'becklog_card' => $kanban_kard,
-    'todo_card' => $kanban_kard,
-    'inprogress_card' => $kanban_kard,
-    'done_card' => $kanban_kard,
     'tasks' => $tasks
-
   ]
 );
 
-
 $website = renderTemplate('layout.php',
     [
-        'site_name' => 'мой сайт',
+        'site_name' => 'Мой сайт',
         'username' => 'Savchenko',
         'content' => $main_content,
         'projects' => $projects,
@@ -75,5 +67,6 @@ $website = renderTemplate('layout.php',
 );
 
 print $website;
+
 
 

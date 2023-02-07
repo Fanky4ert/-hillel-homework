@@ -1,4 +1,4 @@
-<div class="card card-info card-outline" data-task-id="1">
+<div class="card card-info card-outline" data-task-id=<?=$task['id']?>>
     <div class="card-header">
         <h5 class="card-title"><?=htmlentities($task['title'])?></h5>
         <div class="card-tools">
