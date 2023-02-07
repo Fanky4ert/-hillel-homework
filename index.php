@@ -3,7 +3,7 @@ require_once('helpers.php');
 
 $projects = [
   [
-    'id'=>'1',
+    'id'=> 1,
     'name' => 'Проект 1',
     'count' => 2,
   ],
