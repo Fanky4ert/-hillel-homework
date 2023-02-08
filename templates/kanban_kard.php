@@ -1,6 +1,6 @@
-<div class="card card-info card-outline" data-task-id="1">
+<div class="card card-info card-outline" data-task-id=<?=$task['id']?>>
     <div class="card-header">
-        <h5 class="card-title">Зробити головну</h5>
+        <h5 class="card-title"><?=htmlentities($task['title'])?></h5>
         <div class="card-tools">
             <a href="#" class="btn btn-tool btn-link">#3</a>
             <a href="#" class="btn btn-tool">
@@ -10,11 +10,14 @@
     </div>
     <div class="card-body">
         <p>
-        <?=htmlentities(
-            'Зробити головну сторінку списку задач з можливістю перегляду,
-            створення, редагування, видалення задач.'
-            );?>
+        <?=htmlentities($task['description']);?>
         </p>
-        <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+        <?php if(!empty($task['due_date'])):?>
+           <small class="<?=daytime($task['due_date']) ? 'badge-success' : 'badge-danger';?>">
+               <?=hourCard($task['due_date']);?>
+               <i class="far fa-clock">hours</i>
+           </small>
+        <?php endif; ?>
     </div>
 </div>
+

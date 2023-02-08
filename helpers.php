@@ -143,3 +143,37 @@ function renderTemplate($name, array $data = []) {
 
     return $result;
 }
+
+function daytime($taskdate) {
+    $difftime = obsoluttime($taskdate);
+
+    if ($difftime >= 24) {
+      return true;
+        }
+    return false;
+}
+
+
+function hourCard($taskdate) {
+    $difftime = obsoluttime($taskdate);
+    if ($difftime < 0){
+        $difftime = 0;
+    }
+     return $difftime;
+}
+
+function obsoluttime($taskdate){
+    $nowtime = strtotime($taskdate);
+    $worldtime = time();
+    $difftime = floor(($nowtime - $worldtime)/3600);
+
+    return $difftime;
+}
+
+
+
+
+
+
+
+
