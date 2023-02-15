@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body connectedSortable" data-status="backlog">
 
-                    <?php foreach($tasks ['becklog'] as $task): ?>
+                    <?php foreach($tasks ['backlog'] as $task): ?>
                         <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
                     <?php endforeach;?>
 
@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-body connectedSortable" data-status="in-progress">
 
-                    <?php foreach($tasks ['in_progress'] as $task): ?>
+                    <?php foreach($tasks ['in-progress'] as $task): ?>
                         <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
                     <?php endforeach;?>
 

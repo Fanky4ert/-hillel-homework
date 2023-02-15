@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Перевіряє передану дату на відповідність формату 'ГГГГ-ММ-ДД'
  *
@@ -170,6 +171,18 @@ function obsoluttime($taskdate){
     return $difftime;
 }
 
+function getprojects($con){
+    $sql = "SELECT * FROM projects";
+    $result = mysqli_query($con, $sql);
+    $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
+        return $projects;
+}
+function gettask($con){
+    $sql = "SELECT * FROM tasks";
+    $result = mysqli_query($con, $sql);
+    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+       return $tasks;
+}
 
 
 
