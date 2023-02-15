@@ -1,9 +1,18 @@
 <?php
 require_once('helpers.php');
-require_once ('templates/connect_DB.php');
+
+$con = mysqli_connect("localhost", "root", "", "hillel_homework");
+if ($con === false) {
+    die('Не могу подключится к БД');
+}
+echo 'Соединение установлено';
+
+mysqli_report(MYSQLI_REPORT_ERROR);
+mysqli_set_charset($con, 'UTF8');
+
 
 $projects = getprojects($con);
-$tasks = gettask($con);
+$tasks = gettasks($con);
 
 $resultTasks = [
     'backlog' => [],
