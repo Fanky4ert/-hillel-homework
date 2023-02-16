@@ -170,6 +170,18 @@ function obsoluttime($taskdate){
     return $difftime;
 }
 
+
+function connect (){
+    mysqli_report(MYSQLI_REPORT_ERROR);
+    $con = mysqli_connect("localhost", "root", "", "hillel_homework");
+    if ($con === false) {
+        die('Не могу подключится к БД');
+    }
+        mysqli_set_charset($con, 'UTF8');
+
+        return $con;
+}
+
 function getprojects($con){
     $sql = "SELECT * FROM projects";
     $result = mysqli_query($con, $sql);
