@@ -61,9 +61,9 @@
                         В процесі
                     </h3>
                 </div>
-                <div class="card-body connectedSortable" data-status="in-progress">
+                <div class="card-body connectedSortable" data-status="in_progress">
 
-                    <?php foreach($tasks ['in-progress'] as $task): ?>
+                    <?php foreach($tasks ['in_progress'] as $task): ?>
                         <?=renderTemplate('kanban_kard.php', ['task' => $task]);?>
                     <?php endforeach;?>
 
