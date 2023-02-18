@@ -21,7 +21,7 @@ PRIMARY KEY (id)
 CREATE TABLE tasks (
 id  INT UNSIGNED NOT NULL AUTO_INCREMENT,
 created_at DATETIME NOT NULL,
-status ENUM('backlog', 'to-do', 'in-progress', 'done') NOT NULL,
+status ENUM('backlog', 'to-do', 'in_progress', 'done') NOT NULL,
 header VARCHAR (50) NOT NULL,
 description VARCHAR (255) NOT NULL,
 link VARCHAR (255) NOT NULL,

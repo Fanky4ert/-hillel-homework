@@ -22,6 +22,7 @@
     <!-- custom kanban styles -->
     <link rel="stylesheet" href="static/css/kanban.css">
 
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
