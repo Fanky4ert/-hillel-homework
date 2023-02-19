@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="index.php" class="nav-link active">
+    <a href="index.php?id=<?=$project['id'];?>" class="nav-link active">
         <i class="nav-icon fas fa-columns"></i>
         <p>
             <?=htmlentities('Назва проекту')?>
@@ -7,4 +7,3 @@
         </p>
     </a>
 </li>
-

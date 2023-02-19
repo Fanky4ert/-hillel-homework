@@ -80,7 +80,7 @@
                        with font-awesome or any other icon font library -->
         <?php foreach($projects as $key => $project): ?>
                     <li class="nav-item">
-                        <a href="index.php?id=<?=$project['id'];?>" class="nav-link<?=$key === 0 ? ' active' : ''?>">
+                        <a href="index.php?id=<?=$project['id'];?>" class="nav-link<?=$project['id'] === $_GET['id'] ? ' active' : ''?>">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
                                 <?=htmlspecialchars($project['name']);?>
