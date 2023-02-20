@@ -193,7 +193,7 @@ function getprojects($con){
 }
 
 function gettasks($con, $id_project){
-    $sql = "SELECT * FROM tasks where project_id=" . $id_project;
+    $sql = "SELECT * FROM tasks where project_id= " . (int)$id_project;
     $result = mysqli_query($con, $sql);
        if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));

@@ -1,32 +1,31 @@
 <?php
 require_once('helpers.php');
 
-$id = filter_input(INPUT_GET,'id', FILTER_VALIDATE_INT);
+$id_project = filter_input(INPUT_GET,'id', FILTER_VALIDATE_INT);
+//$id_project = renderTemplate('templates/layout.php');
+//var_dump($id_project);die;
+
 $con = connect();
 $projects = getprojects($con);
 
 
 $result = true;
-if ($id !== false && $id !== null){
+if ($id_project !== false && $id_project !== null){
     $result = false;
 foreach ($projects as $project){
-     if ((int)$project['id'] === $id){
+     if ((int)$project['id'] === $id_project){
          $result = true;
      }
    }
 }
 
-if ($id === false || $result === false){
+if ($id_project === false || $result === false){
     header("HTTP/1.1 404 Not Found");
     die;
 }
-$id_project = $id;
-
-
-
 if ($id_project !== null) {
 
-    $tasks = gettasks($con, $id);
+    $tasks = gettasks($con, $id_project);
     $resultTasks = [
         'backlog' => [],
         'to-do' => [],
@@ -53,7 +52,7 @@ $main_content = renderTemplate('main.php',
     ]
 );
 
-if ($id === null) {
+if ($id_project === null) {
     $main_content = '<div class="main-footer">' . ' Виберіть або створіть проект' . "</div>";
 
 }
@@ -64,6 +63,7 @@ $website = renderTemplate('layout.php',
         'username' => 'Savchenko',
         'content' => $main_content,
         'projects' => $projects,
+        'id_project' => $id_project,
     ]
 );
 
