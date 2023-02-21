@@ -192,8 +192,8 @@ function getprojects($con){
         return $projects;
 }
 
-function gettasks($con){
-    $sql = "SELECT * FROM tasks";
+function gettasks($con, $id_project){
+    $sql = "SELECT * FROM tasks where project_id= " . (int)$id_project;
     $result = mysqli_query($con, $sql);
        if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
@@ -202,8 +202,18 @@ function gettasks($con){
        return $tasks;
 }
 
+function getusers($con)
+{
+    $sql = "select * from users";
 
+    $result = mysqli_query($con, $sql);
+    if ($result === false) {
+        die ('Ошибка при выполнении запроса: ' . mysqli_error($con));
+    }
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+    return $result;
+}
 
 
 
