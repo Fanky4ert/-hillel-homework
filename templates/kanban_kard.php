@@ -12,7 +12,7 @@
         <p>
         <?=htmlentities($task['description']);?>
         </p>
-        <?php if(!empty($task['due_date'])):?>
+        <?php if (!empty($task['due_date'])) :?>
            <small class="<?=daytime($task['due_date']) ? 'badge-success' : 'badge-danger';?>">
                <?=hourCard($task['due_date']);?>
                <i class="far fa-clock">hours</i>

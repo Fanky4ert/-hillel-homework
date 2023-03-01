@@ -102,7 +102,8 @@ function getNounPluralForm (int $number, string $one, string $two, string $many)
     $mod10 = $number % 10;
     $mod100 = $number % 100;
 
-    switch (true) {
+    switch (true)
+    {
         case ($mod100 >= 11 && $mod100 <= 20):
             return $many;
 
@@ -127,7 +128,8 @@ function getNounPluralForm (int $number, string $one, string $two, string $many)
  * @param array $data Асоціативний масив із даними для шаблону
  * @return string Підсумковий HTML
  */
-function renderTemplate($name, array $data = []) {
+function renderTemplate($name, array $data = [])
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -144,34 +146,38 @@ function renderTemplate($name, array $data = []) {
     return $result;
 }
 
-function daytime($taskdate) {
+function daytime($taskdate): bool
+{
     $difftime = obsoluttime($taskdate);
 
     if ($difftime >= 24) {
-      return true;
-        }
+         return true;
+    }
     return false;
 }
 
 
-function hourCard($taskdate) {
-    $difftime = obsoluttime($taskdate);
-    if ($difftime < 0){
+function hourCard($taskDate)
+{
+     $difftime = obsoluttime($taskDate);
+    if ($difftime < 0) {
         $difftime = 0;
     }
      return $difftime;
 }
 
-function obsoluttime($taskdate){
+function obsoluttime($taskdate)
+{
     $nowtime = strtotime($taskdate);
     $worldtime = time();
-    $difftime = floor(($nowtime - $worldtime)/3600);
+    $difftime = floor(($nowtime - $worldtime) / 3600);
 
     return $difftime;
 }
 
 
-function connect (){
+function connect()
+{
     mysqli_report(MYSQLI_REPORT_ERROR);
     $con = mysqli_connect("localhost", "root", "", "hillel_homework");
     if ($con === false) {
@@ -182,20 +188,22 @@ function connect (){
         return $con;
 }
 
-function getprojects($con){
+function getProjects($con)
+{
     $sql = "SELECT * FROM projects";
     $result = mysqli_query($con, $sql);
     if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
     }
-    $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $projects;
 }
 
-function gettasks($con, $id_project){
+function getTasks($con, $id_project)
+{
     $sql = "SELECT * FROM tasks where project_id= " . (int)$id_project;
     $result = mysqli_query($con, $sql);
-       if ($result === false) {
+    if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
     }
        $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -208,7 +216,7 @@ function getusers($con)
 
     $result = mysqli_query($con, $sql);
     if ($result === false) {
-        die ('Ошибка при выполнении запроса: ' . mysqli_error($con));
+        die('Ошибка при выполнении запроса: ' . mysqli_error($con));
     }
     $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -216,5 +224,7 @@ function getusers($con)
 }
 
 
-
+//function debug($data){
+  //  echo '<pre></pre>' . print_r($data, 1) . '<pre></pre>';
+//}
 
