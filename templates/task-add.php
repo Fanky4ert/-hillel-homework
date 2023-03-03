@@ -153,7 +153,7 @@
                                            <?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>"
                                            <option></option>
                                          <?php foreach ($projects as $project) : ?>
-                                         <option><?=$project['name']?></option>
+                                         <option value="<?=$project['id']?>"><?=$project['name']?></option>
                                          <?php endforeach;?>
                                     </select>
                                     <?=!empty($errors['selectProject']) ?

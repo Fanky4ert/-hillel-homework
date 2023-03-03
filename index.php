@@ -60,6 +60,6 @@ $website = renderTemplate(
         'content' => $main_content,
         'projects' => $projects,
         'id_project' => $id_project,
-        ]
+    ]
 );
 print $website;

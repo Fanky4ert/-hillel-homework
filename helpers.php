@@ -29,7 +29,8 @@ function isDateValid(string $date) : bool {
  *
  * @return mysqli_stmt Підготовлений вираз
  */
-function dbGetPrepareStmt($link, $sql, $data = []) {
+function dbGetPrepareStmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($stmt === false) {
@@ -96,14 +97,13 @@ function dbGetPrepareStmt($link, $sql, $data = []) {
  *
  * @return string Розрахована форма множини
  */
-function getNounPluralForm (int $number, string $one, string $two, string $many): string
+function getNounPluralForm(int $number, string $one, string $two, string $many): string
 {
     $number = (int) $number;
     $mod10 = $number % 10;
     $mod100 = $number % 100;
 
-    switch (true)
-    {
+    switch (true) {
         case ($mod100 >= 11 && $mod100 <= 20):
             return $many;
 
@@ -208,6 +208,33 @@ function getTasks($con, $id_project)
     }
        $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
        return $tasks;
+}
+
+function insertTaskToDatabase($con, $created_at, $header, $description, $end_time, $user_id, $project_id)
+{
+    $created_at = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO tasks (created_at, header, description, end_time, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    if ($stmt === false) {
+        die('Не могу подготовить выражение к вполнению');
+    }
+    $bind_param = mysqli_stmt_bind_param(
+        $stmt,
+        'ssssii',
+        $created_at,
+        $header,
+        $description,
+        $end_time,
+        $user_id,
+        $project_id
+    );
+    if ($bind_param === false) {
+        die('Ошибка привязки');
+    }
+    $result = mysqli_stmt_execute($stmt);
+    if ($result === false) {
+        die('Не могу подготовить запрос');
+    }
 }
 
 function getusers($con)
