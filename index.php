@@ -50,16 +50,21 @@ if ($id_project !== null) {
     );
 }
 
-
+$project_name = renderTemplate(
+    'project_name.php',
+    [
+    'projects' => $projects,
+    'id_project' => $id_project,
+    'username' => 'Savchenko',
+    ]
+);
 
 $website = renderTemplate(
     'layout.php',
     [
         'site_name' => 'Мой сайт',
-        'username' => 'Savchenko',
         'content' => $main_content,
-        'projects' => $projects,
-        'id_project' => $id_project,
+        'project_name' => $project_name,
     ]
 );
 print $website;

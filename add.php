@@ -5,7 +5,6 @@ $con = connect();
 $projects = getProjects($con);
 $errors = [];
 $user_id = 1;
-$link = ('index.php');
 if (isset($_POST['btn-add'])) {
     $id_project = filter_input(INPUT_POST, 'selectProject', FILTER_VALIDATE_INT);
 
@@ -58,7 +57,30 @@ if (isset($_POST['btn-add'])) {
         }
     }
 }
-print renderTemplate('task-add.php', [
-    'errors' => $errors,
-    'projects' => $projects,
-]);
+
+$project_name = renderTemplate(
+    'project_name.php',
+    [
+        'projects' => $projects,
+        'id_project' => $projects,
+        'username' => 'Savchenko',
+
+    ]
+);
+
+$task_add = renderTemplate(
+    'task-add.php',
+    [
+        'errors' => $errors,
+        'projects' => $projects,
+    ]
+);
+
+print renderTemplate(
+    'layout.php',
+    [
+        'site_name' => 'Мой сайт',
+        'content' => $task_add,
+        'project_name' => $project_name,
+    ]
+);
