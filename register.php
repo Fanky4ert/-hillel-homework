@@ -46,4 +46,8 @@ if (isset($_POST['btn-add-reg'])) {
     }
 }
 
-print renderTemplate('register-add.php');
+print renderTemplate('register-add.php',
+    [
+        'errors' => $errors,
+    ]
+);

@@ -35,6 +35,9 @@
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
+                    <?=!empty($errors['name-register']) ?
+                        '<span id="Name-error" class="error invalid-feedback">' .
+                        htmlspecialchars($errors['name-register']) . '</span>' : ''?>
                 </div>
                 <div class="input-group mb-3">
                     <input type="email"  required name="email-register" placeholder="Email" class="form-control
@@ -44,6 +47,9 @@
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                    <?=!empty($errors['email-register']) ?
+                        '<span id="Name-error" class="error invalid-feedback">' .
+                        htmlspecialchars($errors['email-register']) . '</span>' : ''?>
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" required name="password1" placeholder="Пароль" class="form-control
@@ -53,6 +59,9 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                    <?=!empty($errors['password1']) ?
+                        '<span id="Name-error" class="error invalid-feedback">' .
+                        htmlspecialchars($errors['password1']) . '</span>' : ''?>
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" required name="password2" placeholder="Повторіть пароль" class="form-control
@@ -62,11 +71,14 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                    <?=!empty($errors['password2']) ?
+                        '<span id="Name-error" class="error invalid-feedback">' .
+                        htmlspecialchars($errors['password2']) . '</span>' : ''?>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms-check" value="agree">
+                        <div class="icheck-primary<?=!empty($errors['terms-check']) ? ' is-invalid' : ''?>">
+                            <input name="terms-check" type="checkbox" id="agreeTerms" value="agree">
                             <label for="agreeTerms">
                                 Я згоден(а) з <a href="#">умовами</a>
                             </label>
