@@ -52,8 +52,8 @@ if (isset($_POST['btn-add'])) {
             $user_id,
             $id_project
         );
-        if ($insertDB === true) {
-            header("Location: index.php");
+        if ($insertDB = true) {
+            header('Location: index.php');
         }
     }
 }

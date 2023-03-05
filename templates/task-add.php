@@ -33,35 +33,33 @@
                                 <div class="form-group">
                                     <label for="inputName">Назва задачі</label>
                                     <input type="text" id="inputName" name="inputName" required class="form-control
-                                         <?=!empty($errors['inputName']) ? ' is-invalid' : ''?>
-                                    ">
-                                    <?=!empty($errors['inputName']) ?
+                                        <?=!empty($errors['inputName']) ? ' is-invalid' : ''?>"
+                                        "<?=!empty($errors['inputName']) ?
                                         '<span id="Name-error" class="error invalid-feedback">' .
-                                        $errors['inputName'] . '</span>'
-                                        : ''?>
+                                        htmlspecialchars($errors['inputName']) . '</span>' : ''?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Опис задачі</label>
-                                    <textarea id="inputDescription"  name="inputDescription" class="form-control
-                                        <?=!empty($errors['inputDescription']) ? ' is-invalid' : ''?>" rows="4">
-                                        </textarea>
+                                    <textarea id="inputDescription" name="inputDescription" class="form-control
+                                         <?=!empty($errors['inputDescription']) ? ' is-invalid' : ''?>" rows="4">
+                                    </textarea>
                                         <?=!empty($errors['inputDescription']) ?
                                         '<span id="Name-error" class="error invalid-feedback">' .
-                                         $errors['inputDescription'] . '</span>'  : ''?>
+                                        htmlspecialchars($errors['inputDescription']) . '</span>'  : ''?>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="selectProject">Оберіть проект</label>
                                     <select required id="selectProject" name="selectProject" class="form-control
-                                           <?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>"
-                                           <option></option>
-                                         <?php foreach ($projects as $project) : ?>
-                                         <option value="<?=$project['id']?>"><?=$project['name']?></option>
-                                         <?php endforeach;?>
+                                        <?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>"
+                                    <option></option>
+                                        <?php foreach ($projects as $project) : ?>
+                                    <option value="<?=$project['id']?>"><?=($project['name'])?></option>
+                                        <?php endforeach;?>
                                     </select>
-                                    <?=!empty($errors['selectProject']) ?
+                                        <?=!empty($errors['selectProject']) ?
                                         '<span id="Name-error" class="error invalid-feedback">' .
-                                        $errors['selectProject'] . '</span>'  : ''?>
+                                        htmlspecialchars($errors['selectProject']) . '</span>'  : ''?>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -83,12 +81,10 @@
                                 <div class="form-group">
                                     <label for="inputDate">Дата виконання</label>
                                     <input type="date" id="inputDate"  name="inputDate" class="form-control
-                                           <?=!empty($errors['inputDate']) ? ' is-invalid' : ''?>
-                                            ">
-                                    <?=!empty($errors['inputDate']) ?
+                                        <?=!empty($errors['inputDate']) ? ' is-invalid' : ''?>">
+                                         <?=!empty($errors['inputDate']) ?
                                         '<span id="Name-error" class="error invalid-feedback">' .
-                                        $errors['inputDate'] . '</span>'
-                                        : ''?>
+                                        htmlspecialchars($errors['inputDate']) . '</span>' : ''?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputTaskFile">Прикріпити файл</label>
