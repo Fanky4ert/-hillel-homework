@@ -52,11 +52,14 @@ if (isset($_POST['btn-add'])) {
             $user_id,
             $id_project
         );
+
         if ($insertDB = true) {
             header('Location: index.php');
         }
     }
 }
+$valueName = filter_input(INPUT_POST, 'inputName');
+$valueDate = filter_input(INPUT_POST,'inputDate');
 
 $project_name = renderTemplate(
     'project_name.php',
@@ -73,6 +76,8 @@ $task_add = renderTemplate(
     [
         'errors' => $errors,
         'projects' => $projects,
+        'valueName' => $valueName,
+        'valueDate' => $valueDate,
     ]
 );
 

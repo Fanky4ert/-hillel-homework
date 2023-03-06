@@ -237,7 +237,8 @@ function insertTaskToDatabase($con, $created_at, $header, $description, $end_tim
     }
 }
 
-function createusertoDB ($con, $created_at, $email, $username, $password){
+function createusertoDB ($con, $created_at, $email, $username, $password)
+{
     $created_at = date("Y-m-d H:i:s");
     $password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (created_at, email, username, password) VALUES (?, ?, ?, ?)";
@@ -256,12 +257,6 @@ function createusertoDB ($con, $created_at, $email, $username, $password){
     if ($bind_param === false) {
         die('Ошибка привязки');
     }
-    $result = mysqli_stmt_execute($stmt);
-    if ($result === false) {
-        die('Не могу подготовить запрос');
-    }
 }
-
-
 
 
