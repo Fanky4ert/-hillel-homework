@@ -32,29 +32,37 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputName">Назва задачі</label>
-                                <input  type="text" id="inputName" name="inputName" value="<?=$valueName?>" required class="form-control<?=!empty($errors['inputName']) ? ' is-invalid' : ''?>">
+                                <input  type="text" id="inputName" name="inputName"  required
+                                        class="form-control<?=!empty($errors['inputName']) ? ' is-invalid' : ''?>"
+                                        value="<?=htmlspecialchars($formData['inputName'])?>">
                                 <?php if (!empty($errors['inputName'])) : ?>
                                     <span id="Name-error" class="error invalid-feedback"><?= htmlspecialchars($errors['inputName']) ?></span>
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
                                 <label for="inputDescription">Опис задачі</label>
-                                <textarea id="inputDescription" name="inputDescription" class="form-control<?=!empty($errors['inputDescription']) ? ' is-invalid' : ''?>" rows="4">
-                                    <?= htmlspecialchars(trim($_POST['inputDescription'] ?? '')) ?></textarea>
+                                <textarea id="inputDescription" name="inputDescription" class="form-control
+                                <?= !empty($errors['inputDescription']) ? ' is-invalid' : ''?>"
+                                 rows="4"><?= htmlspecialchars($formData['inputDescription'] ?? '')?></textarea>
                               <?php if (!empty($errors['inputDescription'])) : ?>
-                                  <span id="Description-error" class="error invalid-feedback"><?= htmlspecialchars($errors['inputDescription']) ?></span>
+                                  <span id="Description-error"
+                                        class="error invalid-feedback"><?= htmlspecialchars($errors['inputDescription']) ?></span>
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
                                 <label for="selectProject">Оберіть проект</label>
-                                <select required id="selectProject" name="selectProject" class="form-control<?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>">
+                                <select required id="selectProject" name="selectProject"
+                                        class="form-control<?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>">
                                     <option></option>
                                     <?php foreach ($projects as $project) : ?>
-                                        <option value="<?= $project['id'] ?>"<?= isset($_POST['selectProject']) == $project['id'] ? ' selected' : '' ?>><?= $project['name'] ?></option>
+                                        <option value="<?= $project['id'] ?>"
+                                            <?= isset($formData['selectProject']) == $project['id'] ? ' selected' : '' ?>>
+                                            <?= $project['name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if (!empty($errors['selectProject'])) : ?>
-                                    <span id="Project-error" class="error invalid-feedback"><?= htmlspecialchars($errors['selectProject']) ?></span>
+                                    <span id="Project-error" class="error invalid-feedback">
+                                        <?= htmlspecialchars($errors['selectProject']) ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -76,7 +84,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputDate">Дата виконання</label>
-                                <input type="date" id="inputDate" name="inputDate" value="<?=$valueDate;?>" class="form-control<?= !empty($errors['inputDate']) ? ' is-invalid' : '' ?>">
+                                <input type="date" id="inputDate" name="inputDate" value="<?=$formData['inputDate'];?>"
+                                       class="form-control<?= !empty($errors['inputDate']) ? ' is-invalid' : '' ?>">
                                 <?= !empty($errors['inputDate']) ?
                                     '<span id="Date-error" class="error invalid-feedback">' .
                                     htmlspecialchars($errors['inputDate']) . '</span>'

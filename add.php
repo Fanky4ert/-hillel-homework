@@ -1,24 +1,46 @@
 <?php
 
 require_once('helpers.php');
+require_once('classes/FirstClass.php');
 $con = connect();
 $projects = getProjects($con);
 $errors = [];
 $user_id = 1;
+
+
+//$formData = new FormData(
+ //   $_POST['inputName'],
+  //  $_POST['inputDescription'],
+//    $_POST['inputDate'],
+//    $_POST['selectProject']
+//);
+$formData = [
+    'inputName' => '',
+    'inputDescription' => '',
+    'inputDate' => '',
+    'selectProject' => '',
+];
+
+
 if (isset($_POST['btn-add'])) {
     $id_project = filter_input(INPUT_POST, 'selectProject', FILTER_VALIDATE_INT);
-
-    if ($_POST['inputName'] === '') {
+    $formData = [
+        'inputName' => $_POST['inputName'],
+        'inputDescription' => $_POST['inputDescription'],
+        'inputDate' => $_POST['inputDate'],
+        'selectProject' => $_POST['selectProject'],
+    ];
+    if ($formData['inputName'] === '') {
         $errors['inputName'] = 'Помилка імені';
     }
-    if (strlen($_POST['inputName']) < 2 || strlen($_POST['inputName']) > 50) {
+    if (strlen($formData['inputName']) < 2 || strlen($formData['inputName']) > 50) {
         $errors['inputName'] = 'Помилка формату імені';
     }
-    if (strlen($_POST['inputDescription']) > 100) {
+    if (strlen($formData['inputDescription']) > 100) {
         $errors['inputDescription'] = 'Помилка, не більше 100 символів';
     }
-    $dateValid = isDateValid($_POST['inputDate']); //bool
-    $dateCalc = obsoluttime($_POST['inputDate']); // количество часов
+    $dateValid = isDateValid($formData['inputDate']); //bool
+    $dateCalc = obsoluttime($formData['inputDate']); // количество часов
 
     if ($dateValid === false || $dateCalc <= 0) {
         $errors['inputDate'] = 'Помилка дати';
@@ -46,9 +68,9 @@ if (isset($_POST['btn-add'])) {
         $insertDB = insertTaskToDatabase(
             $con,
             date('Y-m-d H:i:s'),
-            $_POST['inputName'],
-            $_POST['inputDescription'],
-            $_POST['inputDate'],
+            $formData['inputName'],
+            $formData['inputDescription'],
+            $formData['inputDate'],
             $user_id,
             $id_project
         );
@@ -58,8 +80,9 @@ if (isset($_POST['btn-add'])) {
         }
     }
 }
-$valueName = filter_input(INPUT_POST, 'inputName');
-$valueDate = filter_input(INPUT_POST,'inputDate');
+
+//$valueName = filter_input(INPUT_POST, 'inputName');
+//$valueDate = filter_input(INPUT_POST,'inputDate');
 
 $project_name = renderTemplate(
     'project_name.php',
@@ -76,8 +99,9 @@ $task_add = renderTemplate(
     [
         'errors' => $errors,
         'projects' => $projects,
-        'valueName' => $valueName,
-        'valueDate' => $valueDate,
+       // 'valueName' => $valueName,
+       // 'valueDate' => $valueDate,
+        'formData' => $formData,
     ]
 );
 
