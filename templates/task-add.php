@@ -52,12 +52,13 @@
                             <div class="form-group">
                                 <label for="selectProject">Оберіть проект</label>
                                 <select required id="selectProject" name="selectProject"
-                                        class="form-control<?=!empty($errors['selectProject']) ? ' is-invalid' : ''?>">
+                                        class="form-control<?= !empty($errors['selectProject']) ? ' is-invalid' : ''?>">
                                     <option></option>
                                     <?php foreach ($projects as $project) : ?>
                                         <option value="<?= $project['id'] ?>"
-                                            <?= isset($formData['selectProject']) == $project['id'] ? ' selected' : '' ?>>
-                                            <?= $project['name'] ?></option>
+                                            <?= isset($formData['selectProject']) && $formData['selectProject'] == $project['id'] ? ' selected' : '' ?>>
+                                            <?= $project['name'] ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if (!empty($errors['selectProject'])) : ?>
