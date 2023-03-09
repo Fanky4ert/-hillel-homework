@@ -1,26 +1,26 @@
 <?php
 
 require_once('helpers.php');
-$id_project = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$idProject = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $con = connect();
 $projects = getProjects($con);
 $result = true;
-if ($id_project !== false && $id_project !== null) {
+if ($idProject !== false && $idProject !== null) {
     $result = false;
     foreach ($projects as $project) {
-        if ((int)$project['id'] === $id_project) {
+        if ((int)$project['id'] === $idProject) {
             $result = true;
         }
     }
 }
 
-if ($id_project === false || $result === false) {
+if ($idProject === false || $result === false) {
     header("HTTP/1.1 404 Not Found");
     die;
 }
 
-if ($id_project !== null) {
-    $tasks = gettasks($con, $id_project);
+if ($idProject !== null) {
+    $tasks = gettasks($con, $idProject);
     $resultTasks = [
         'backlog' => [],
         'to-do' => [],
@@ -33,15 +33,15 @@ if ($id_project !== null) {
             'id' => $task['id'],
             'title' => $task['header'],
             'description' => $task['description'],
-            'due_date' => $task['end_time'],
+            'dueDate' => $task['endTime'],
         ];
     }
 }
 
-$main_content = '<div class="main-footer">' . ' Виберіть або створіть проект' . "</div>";
+$mainContent = '<div class="main-footer">' . ' Виберіть або створіть проект' . "</div>";
 
-if ($id_project !== null) {
-    $main_content = renderTemplate(
+if ($idProject !== null) {
+    $mainContent = renderTemplate(
         'main.php',
         [
             'tasks' => $resultTasks,
@@ -50,11 +50,11 @@ if ($id_project !== null) {
     );
 }
 
-$project_name = renderTemplate(
+$projectName = renderTemplate(
     'project_name.php',
     [
     'projects' => $projects,
-    'id_project' => $id_project,
+    'idProject' => $idProject,
     'username' => 'Savchenko',
     ]
 );
@@ -62,9 +62,9 @@ $project_name = renderTemplate(
 $website = renderTemplate(
     'layout.php',
     [
-        'site_name' => 'Мой сайт',
-        'content' => $main_content,
-        'project_name' => $project_name,
+        'siteName' => 'Мой сайт',
+        'content' => $mainContent,
+        'projectName' => $projectName,
     ]
 );
 print $website;

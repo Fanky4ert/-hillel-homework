@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?=$site_name?>
+        <?=$siteName?>
     </title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -51,7 +51,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <?=$project_name?>
+    <?=$projectName?>
     <!-- Content Wrapper. Contains page content -->
     <?=$content?>
     <!-- Footer -->

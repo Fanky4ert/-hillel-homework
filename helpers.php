@@ -146,11 +146,11 @@ function renderTemplate($name, array $data = [])
     return $result;
 }
 
-function daytime($taskdate): bool
+function dayTime($taskDate): bool
 {
-    $difftime = obsoluttime($taskdate);
+    $diffTime = obsolutTime($taskDate);
 
-    if ($difftime >= 24) {
+    if ($diffTime >= 24) {
          return true;
     }
     return false;
@@ -159,20 +159,20 @@ function daytime($taskdate): bool
 
 function hourCard($taskDate)
 {
-     $difftime = obsoluttime($taskDate);
-    if ($difftime < 0) {
-        $difftime = 0;
+     $diffTime = obsolutTime($taskDate);
+    if ($diffTime < 0) {
+        $diffTime = 0;
     }
-     return $difftime;
+     return $diffTime;
 }
 
-function obsoluttime($taskdate)
+function obsolutTime($taskDate)
 {
-    $nowtime = strtotime($taskdate);
-    $worldtime = time();
-    $difftime = floor(($nowtime - $worldtime) / 3600);
+    $nowTime = strtotime($taskDate);
+    $worldTime = time();
+    $diffTime = floor(($nowTime - $worldTime) / 3600);
 
-    return $difftime;
+    return $diffTime;
 }
 
 
@@ -199,9 +199,9 @@ function getProjects($con)
         return $projects;
 }
 
-function getTasks($con, $id_project)
+function getTasks($con, $idProject)
 {
-    $sql = "SELECT * FROM tasks where project_id= " . (int)$id_project;
+    $sql = "SELECT * FROM tasks where projectId= " . (int)$idProject;
     $result = mysqli_query($con, $sql);
     if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
@@ -210,25 +210,25 @@ function getTasks($con, $id_project)
        return $tasks;
 }
 
-function insertTaskToDatabase($con, $created_at, $header, $description, $end_time, $user_id, $project_id)
+function insertTaskToDatabase($con, $createdAt, $header, $description, $endTime, $userId, $projectId)
 {
-    $created_at = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO tasks (created_at, header, description, end_time, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $createdAt = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO tasks (createdAt, header, description, endTime, userId, projectId) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($con, $sql);
     if ($stmt === false) {
         die('Не могу подготовить выражение к вполнению');
     }
-    $bind_param = mysqli_stmt_bind_param(
+    $bindParam = mysqli_stmt_bind_param(
         $stmt,
         'ssssii',
-        $created_at,
+        $createdAt,
         $header,
         $description,
-        $end_time,
-        $user_id,
-        $project_id
+        $endTime,
+        $userId,
+        $projectId
     );
-    if ($bind_param === false) {
+    if ($bindParam === false) {
         die('Ошибка привязки');
     }
     $result = mysqli_stmt_execute($stmt);
@@ -237,24 +237,24 @@ function insertTaskToDatabase($con, $created_at, $header, $description, $end_tim
     }
 }
 
-function createusertoDB ($con, $created_at, $email, $username, $password)
+function createusertoDB ($con, $createdAt, $email, $username, $password)
 {
-    $created_at = date("Y-m-d H:i:s");
+    $createdAt = date("Y-m-d H:i:s");
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (created_at, email, username, password) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO users (createdAt, email, username, password) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($con, $sql);
     if ($stmt === false) {
         die('Не могу подготовить выражение к вполнению');
     }
-    $bind_param = mysqli_stmt_bind_param(
+    $bindParam = mysqli_stmt_bind_param(
         $stmt,
         'ssss',
-        $created_at,
+        $createdAt,
         $email,
         $username,
         $password
     );
-    if ($bind_param === false) {
+    if ($bindParam === false) {
         die('Ошибка привязки');
     }
 }

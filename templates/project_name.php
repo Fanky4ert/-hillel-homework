@@ -27,7 +27,7 @@
         <?php foreach ($projects as $key => $project) : ?>
             <li class="nav-item">
                 <a href="index.php?id=<?=$project['id'];?>" class="nav-link
-                <?=$id_project === (int)$project['id'] ? ' active' : '' ?>">
+                <?=$idProject === (int)$project['id'] ? ' active' : '' ?>">
                     <i class="nav-icon fas fa-columns"></i>
                     <p>
                         <?=htmlspecialchars($project['name']);?>
