@@ -16,3 +16,11 @@ class FormData
         $this->selectProject = $selectProject;
     }
 }
+
+
+//$formData = new FormData(
+//   $_POST['inputName'],
+//  $_POST['inputDescription'],
+//    $_POST['inputDate'],
+//    $_POST['selectProject']
+//);

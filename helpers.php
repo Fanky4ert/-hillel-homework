@@ -201,7 +201,7 @@ function getProjects($con)
 
 function getTasks($con, $idProject)
 {
-    $sql = "SELECT * FROM tasks where projectId= " . (int)$idProject;
+    $sql = "SELECT * FROM tasks where project_id= " . (int)$idProject;
     $result = mysqli_query($con, $sql);
     if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
@@ -210,10 +210,10 @@ function getTasks($con, $idProject)
        return $tasks;
 }
 
-function insertTaskToDatabase($con, $createdAt, $header, $description, $endTime, $userId, $projectId)
+function insertTaskToDatabase($con, $created_at, $header, $description, $end_time, $user_id, $project_id)
 {
-    $createdAt = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO tasks (createdAt, header, description, endTime, userId, projectId) VALUES (?, ?, ?, ?, ?, ?)";
+    $created_at = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO tasks (created_at, header, description, end_time, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($con, $sql);
     if ($stmt === false) {
         die('Не могу подготовить выражение к вполнению');
@@ -221,12 +221,12 @@ function insertTaskToDatabase($con, $createdAt, $header, $description, $endTime,
     $bindParam = mysqli_stmt_bind_param(
         $stmt,
         'ssssii',
-        $createdAt,
+        $created_at,
         $header,
         $description,
-        $endTime,
-        $userId,
-        $projectId
+        $end_time,
+        $user_id,
+        $project_id,
     );
     if ($bindParam === false) {
         die('Ошибка привязки');
@@ -237,11 +237,11 @@ function insertTaskToDatabase($con, $createdAt, $header, $description, $endTime,
     }
 }
 
-function createusertoDB ($con, $createdAt, $email, $username, $password)
+function createusertoDB ($con, $created_at, $email, $username, $password)
 {
     $createdAt = date("Y-m-d H:i:s");
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (createdAt, email, username, password) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO users (created_at, email, username, password) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($con, $sql);
     if ($stmt === false) {
         die('Не могу подготовить выражение к вполнению');

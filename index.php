@@ -33,7 +33,7 @@ if ($idProject !== null) {
             'id' => $task['id'],
             'title' => $task['header'],
             'description' => $task['description'],
-            'dueDate' => $task['endTime'],
+            'dueDate' => $task['end_time'],
         ];
     }
 }

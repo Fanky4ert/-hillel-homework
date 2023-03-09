@@ -7,20 +7,12 @@ $projects = getProjects($con);
 $errors = [];
 $userId = 1;
 
-
-//$formData = new FormData(
- //   $_POST['inputName'],
-  //  $_POST['inputDescription'],
-//    $_POST['inputDate'],
-//    $_POST['selectProject']
-//);
 $formData = [
     'inputName' => '',
     'inputDescription' => '',
     'inputDate' => '',
     'selectProject' => '',
 ];
-
 
 if (isset($_POST['btn-add'])) {
     $idProject = filter_input(INPUT_POST, 'selectProject', FILTER_VALIDATE_INT);
@@ -30,7 +22,7 @@ if (isset($_POST['btn-add'])) {
         'inputDate' => $_POST['inputDate'],
         'selectProject' => $_POST['selectProject'],
     ];
-    if ($formData['inputName'] === '') {
+    if ($formData['inputName'] == '') {
         $errors['inputName'] = 'Помилка імені';
     }
     if (strlen($formData['inputName']) < 2 || strlen($formData['inputName']) > 50) {
@@ -51,7 +43,6 @@ if (isset($_POST['btn-add'])) {
             $errors['inputDate'] = 'Помилка дати';
         }
     }
-
 
     $projects = getProjects($con);
 
@@ -88,9 +79,6 @@ if (isset($_POST['btn-add'])) {
     }
 }
 
-//$valueName = filter_input(INPUT_POST, 'inputName');
-//$valueDate = filter_input(INPUT_POST,'inputDate');
-
 $projectName = renderTemplate(
     'project_name.php',
     [
@@ -106,8 +94,6 @@ $taskAdd = renderTemplate(
     [
         'errors' => $errors,
         'projects' => $projects,
-       // 'valueName' => $valueName,
-       // 'valueDate' => $valueDate,
         'formData' => $formData,
     ]
 );
