@@ -29,7 +29,8 @@ function isDateValid(string $date) : bool {
  *
  * @return mysqli_stmt Підготовлений вираз
  */
-function dbGetPrepareStmt($link, $sql, $data = []) {
+function dbGetPrepareStmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($stmt === false) {
@@ -96,7 +97,7 @@ function dbGetPrepareStmt($link, $sql, $data = []) {
  *
  * @return string Розрахована форма множини
  */
-function getNounPluralForm (int $number, string $one, string $two, string $many): string
+function getNounPluralForm(int $number, string $one, string $two, string $many): string
 {
     $number = (int) $number;
     $mod10 = $number % 10;
@@ -127,7 +128,8 @@ function getNounPluralForm (int $number, string $one, string $two, string $many)
  * @param array $data Асоціативний масив із даними для шаблону
  * @return string Підсумковий HTML
  */
-function renderTemplate($name, array $data = []) {
+function renderTemplate($name, array $data = [])
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -144,34 +146,38 @@ function renderTemplate($name, array $data = []) {
     return $result;
 }
 
-function daytime($taskdate) {
-    $difftime = obsoluttime($taskdate);
+function dayTime($taskDate): bool
+{
+    $diffTime = obsolutTime($taskDate);
 
-    if ($difftime >= 24) {
-      return true;
-        }
+    if ($diffTime >= 24) {
+         return true;
+    }
     return false;
 }
 
 
-function hourCard($taskdate) {
-    $difftime = obsoluttime($taskdate);
-    if ($difftime < 0){
-        $difftime = 0;
+function hourCard($taskDate)
+{
+     $diffTime = obsolutTime($taskDate);
+    if ($diffTime < 0) {
+        $diffTime = 0;
     }
-     return $difftime;
+     return $diffTime;
 }
 
-function obsoluttime($taskdate){
-    $nowtime = strtotime($taskdate);
-    $worldtime = time();
-    $difftime = floor(($nowtime - $worldtime)/3600);
+function obsolutTime($taskDate)
+{
+    $nowTime = strtotime($taskDate);
+    $worldTime = time();
+    $diffTime = floor(($nowTime - $worldTime) / 3600);
 
-    return $difftime;
+    return $diffTime;
 }
 
 
-function connect (){
+function connect()
+{
     mysqli_report(MYSQLI_REPORT_ERROR);
     $con = mysqli_connect("localhost", "root", "", "hillel_homework");
     if ($con === false) {
@@ -182,39 +188,75 @@ function connect (){
         return $con;
 }
 
-function getprojects($con){
+function getProjects($con)
+{
     $sql = "SELECT * FROM projects";
     $result = mysqli_query($con, $sql);
     if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
     }
-    $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $projects;
 }
 
-function gettasks($con, $id_project){
-    $sql = "SELECT * FROM tasks where project_id= " . (int)$id_project;
+function getTasks($con, $idProject)
+{
+    $sql = "SELECT * FROM tasks where project_id= " . (int)$idProject;
     $result = mysqli_query($con, $sql);
-       if ($result === false) {
+    if ($result === false) {
         die('Ошибка при выполнении запроса: ' . mysqli_error($con));
     }
        $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
        return $tasks;
 }
 
-function getusers($con)
+function insertTaskToDatabase($con, $created_at, $header, $description, $end_time, $user_id, $project_id)
 {
-    $sql = "select * from users";
-
-    $result = mysqli_query($con, $sql);
-    if ($result === false) {
-        die ('Ошибка при выполнении запроса: ' . mysqli_error($con));
+    $created_at = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO tasks (created_at, header, description, end_time, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    if ($stmt === false) {
+        die('Не могу подготовить выражение к вполнению');
     }
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    return $result;
+    $bindParam = mysqli_stmt_bind_param(
+        $stmt,
+        'ssssii',
+        $created_at,
+        $header,
+        $description,
+        $end_time,
+        $user_id,
+        $project_id,
+    );
+    if ($bindParam === false) {
+        die('Ошибка привязки');
+    }
+    $result = mysqli_stmt_execute($stmt);
+    if ($result === false) {
+        die('Не могу подготовить запрос');
+    }
 }
 
-
+function createusertoDB ($con, $created_at, $email, $username, $password)
+{
+    $createdAt = date("Y-m-d H:i:s");
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (created_at, email, username, password) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    if ($stmt === false) {
+        die('Не могу подготовить выражение к вполнению');
+    }
+    $bindParam = mysqli_stmt_bind_param(
+        $stmt,
+        'ssss',
+        $createdAt,
+        $email,
+        $username,
+        $password
+    );
+    if ($bindParam === false) {
+        die('Ошибка привязки');
+    }
+}
 
 

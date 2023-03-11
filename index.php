@@ -1,51 +1,48 @@
 <?php
+
 require_once('helpers.php');
-
-$id_project = filter_input(INPUT_GET,'id', FILTER_VALIDATE_INT);
-
+$idProject = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $con = connect();
-
-$projects = getprojects($con);
-
+$projects = getProjects($con);
 $result = true;
-if ($id_project !== false && $id_project !== null){
+if ($idProject !== false && $idProject !== null) {
     $result = false;
-   foreach ($projects as $project){
-     if ((int)$project['id'] === $id_project){
-         $result = true;
-     }
-   }
+    foreach ($projects as $project) {
+        if ((int)$project['id'] === $idProject) {
+            $result = true;
+        }
+    }
 }
 
-if ($id_project === false || $result === false){
+if ($idProject === false || $result === false) {
     header("HTTP/1.1 404 Not Found");
     die;
 }
 
-if ($id_project !== null) {
-    $tasks = gettasks($con, $id_project);
+if ($idProject !== null) {
+    $tasks = gettasks($con, $idProject);
     $resultTasks = [
         'backlog' => [],
         'to-do' => [],
         'in_progress' => [],
         'done' => [],
     ];
-    foreach ($tasks as $task){
+    foreach ($tasks as $task) {
         $status = $task['status'];
         $resultTasks[$status][] = [
             'id' => $task['id'],
             'title' => $task['header'],
             'description' => $task['description'],
-            'due_date' => $task['end_time'],
+            'dueDate' => $task['end_time'],
         ];
-
     }
 }
 
-$main_content = '<div class="main-footer">' . ' Виберіть або створіть проект' . "</div>";
+$mainContent = '<div class="main-footer">' . ' Виберіть або створіть проект' . "</div>";
 
-if ($id_project !== null) {
-    $main_content = renderTemplate('main.php',
+if ($idProject !== null) {
+    $mainContent = renderTemplate(
+        'main.php',
         [
             'tasks' => $resultTasks,
 
@@ -53,19 +50,21 @@ if ($id_project !== null) {
     );
 }
 
-
-
-$website = renderTemplate('layout.php',
+$projectName = renderTemplate(
+    'project_name.php',
     [
-        'site_name' => 'Мой сайт',
-        'username' => 'Savchenko',
-        'content' => $main_content,
-        'projects' => $projects,
-        'id_project' => $id_project,
+    'projects' => $projects,
+    'idProject' => $idProject,
+    'username' => 'Savchenko',
     ]
 );
 
+$website = renderTemplate(
+    'layout.php',
+    [
+        'siteName' => 'Мой сайт',
+        'content' => $mainContent,
+        'projectName' => $projectName,
+    ]
+);
 print $website;
-
-
-
