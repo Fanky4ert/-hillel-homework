@@ -45,7 +45,7 @@ if (isset($_POST['btn-add-reg'])) {
     }
 
     if ($formData['terms-check'] === false) {
-        $errors['terms-check1'] = 'Помилка, треба погодитись з умовами';
+        $errors['terms-check'] = 'Помилка, треба погодитись з умовами';
     }
     if (empty($errors)) {
         $insertDB = createusertoDB(

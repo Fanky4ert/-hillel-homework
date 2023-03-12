@@ -87,7 +87,7 @@
                                 Я згоден(а) з <a href="#">умовами</a>
                             </label>
                         </div>
-                        <?=!empty($errors['terms-check1'])?>
+                        <?=!empty($errors['terms-check'])?>
                     </div>
                     <!-- /.col -->
                 </div>
