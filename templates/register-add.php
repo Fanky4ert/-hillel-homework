@@ -82,12 +82,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="icheck-primary">
-                            <input type="checkbox" name="terms-check" id="agreeTerms" value="agree">
+                            <input type="checkbox" name="terms-check" id="agreeTerms" value="agree" <?= $formData['terms-check'] !== false ? 'checked' : ''?>>
                             <label for="agreeTerms">
                                 Я згоден(а) з <a href="#">умовами</a>
                             </label>
                         </div>
-                        <?=!empty($errors['terms-check'])?>
+
+                        <span style="color: red;"><?=!empty($errors['terms-check']) ? htmlspecialchars($errors['terms-check'])  : ''?></span>
+
                     </div>
                     <!-- /.col -->
                 </div>

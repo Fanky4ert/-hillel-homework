@@ -18,7 +18,7 @@ if (isset($_POST['btn-add-reg'])) {
         'password2' => filter_var(trim($_POST['password2']), FILTER_SANITIZE_STRING),
         'terms-check' => key_exists("terms-check",$_POST),
     ];
-    //var_dump($formData);
+    //var_dump($_POST);
     if ($formData['name-register'] === '') {
         $errors['name-register'] = 'Помилка імені';
     }
@@ -40,7 +40,7 @@ if (isset($_POST['btn-add-reg'])) {
     if ($formData['password1'] !== $formData['password2']) {
         $errors['password2'] = 'Помилка, паролі не співпадають';
     }
-    if (strlen($formData['password1']) > 50 || strlen($formData['password2']) > 50) {
+    if (strlen($formData['password1']) > 35 || strlen($formData['password2']) > 35) {
         $errors['password2'] = 'Помилка, не більше 35 символів';
     }
 
@@ -68,3 +68,4 @@ print renderTemplate('register-add.php',
         'formData' => $formData,
     ]
 );
+var_dump($formData);
