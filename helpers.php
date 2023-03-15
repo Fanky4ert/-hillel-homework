@@ -240,7 +240,7 @@ function insertTaskToDatabase($con, $created_at, $header, $description, $end_tim
 function createusertoDB ($con, $created_at, $email, $name, $pass)
 {
     $created_at = date("Y-m-d H:i:s");
-    $pass = md5($pass);
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (created_at, email, name, pass) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($con, $sql);
     if ($stmt === false) {
@@ -263,4 +263,30 @@ function createusertoDB ($con, $created_at, $email, $name, $pass)
     }
 }
 
-
+function checkEmail($con, $email)
+{
+    $sql = "select email from users where email =?";
+    $stmt = mysqli_prepare($con, $sql);
+    if ($stmt === false) {
+        die('Не могу подготовить выражение к вполнению');
+    }
+    $bindParam = mysqli_stmt_bind_param(
+        $stmt,
+        's',
+        $email
+    );
+    if ($bindParam === false) {
+        die('Ошибка привязки');
+    }
+    $result = mysqli_stmt_execute($stmt);
+    if ($result === false) {
+        die('Не могу подготовить запрос');
+    }
+    $getResult = mysqli_stmt_get_result($stmt);
+    if ($getResult === false) {
+        die('Ошибка получения запроса');
+    }
+    if ($getResult->num_rows > 0) {
+        return false;
+    }
+}

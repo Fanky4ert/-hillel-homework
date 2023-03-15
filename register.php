@@ -18,7 +18,6 @@ if (isset($_POST['btn-add-reg'])) {
         'password2' => filter_var(trim($_POST['password2']), FILTER_SANITIZE_STRING),
         'terms-check' => key_exists("terms-check",$_POST),
     ];
-    //var_dump($_POST);
     if ($formData['name-register'] === '') {
         $errors['name-register'] = 'Помилка імені';
     }
@@ -27,6 +26,9 @@ if (isset($_POST['btn-add-reg'])) {
     }
     if ($formData['email-register'] === false) {
         $errors['email-register'] = 'Помилка формату "Email"';
+    }
+    if (checkEmail($con, $formData['email-register']) === false){
+        $errors['email-register'] = 'Помилка, такий Email вже зареестрований';
     }
     if (strlen($formData['email-register']) > 35) {
         $errors['email-register'] = 'Помилка, не більше 35 символів';
@@ -60,7 +62,6 @@ if (isset($_POST['btn-add-reg'])) {
         }
     }
 }
-//var_dump($formData);
 
 print renderTemplate('register-add.php',
     [
@@ -68,4 +69,3 @@ print renderTemplate('register-add.php',
         'formData' => $formData,
     ]
 );
-var_dump($formData);
